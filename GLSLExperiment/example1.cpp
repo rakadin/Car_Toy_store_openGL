@@ -99,7 +99,7 @@ void initGPUBuffers(void)
 
 }
 
-GLuint model_view_loc;
+
 
 
 
@@ -117,6 +117,7 @@ mat4 model_codrinate;// vị trí trong không gian(tọa độ,tỉ lệ)
 // thiết lập camera
 
 	//các tham số cho model view
+GLuint model_view_loc;
 GLfloat radius = 0;
 GLuint projection_loc, camera_loc;
 GLfloat xeye=-3, yeye=3, zeye=23;
@@ -479,7 +480,7 @@ void sun() {
 	glutSolidSphere(1, 64, 64);
 }
 
-// tao ra gia de xe
+// tao ra kệ để hàng - minh duc
 void khungdoc(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)// cot doc cua gia do
 {
 	instance = model_codrinate * Translate(x, y, z) * Scale(0.01 * model_scale , 0.5 * model_scale , 0.01 * model_scale );
