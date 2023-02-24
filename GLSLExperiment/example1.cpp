@@ -137,23 +137,24 @@ void setupCamera() {
 }
 // thiết lập hình dáng.
 
-// nền đất.kích thước: 20*0.5*20;
+// nền đất.- minh duc
 void platform() {
 	mat4 instance = Translate(0,-0.25,0)*Scale(30, 0.5, 30);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance);
 	changeColor(0, 0.4, 0);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
-// ngôi nhà cấp 4.
 
-// bên dưới. kích thước:10*1*16;
+// cửa hàng cấp 4.-Minh Đức
+
+// nền nhà- minh duc
 void ground() {
 	mat4 instance = Translate(0,0.5, 0)*Scale(10,1, 16);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance);
 	changeColor(0.4, 0.3, 0);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
-// tường :1*6*16;
+// tường - minh duc
 void wall(mat4 mt) {
 	
 	mat4 instance = mt * Scale(1, 6, 16);
@@ -240,12 +241,10 @@ void vemainha() {
 	changeColor(0,0.4,0.4);
 	vec4 color = { 0, 0, 0 };
 	glUniform4fv(glGetUniformLocation(program, "colorValues"), 1, color); 
-
-
 	glDrawArrays(GL_TRIANGLES, 0, 24);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(points), points);
 }
-// tổng hợp
+// tổng hợp - set cua hang - minh duc
 void Myhome() {
 	model_scale = 1;
 	model_codrinate = Translate(0, 0, 0);
@@ -266,7 +265,7 @@ void Myhome() {
 }
 
 
-//cửa chính.
+//cửa chính.- minh duc
 GLfloat theta_Cua[] = { 0,0 };
 void Cua_Trai(mat4 instance , mat4 model_view, GLdouble Cua_Dai, GLdouble Cua_Rong, GLdouble Cua_Cao) {
 	instance = Translate(0.5 * Cua_Dai, 0.5 * Cua_Cao, 0.0) * Scale(Cua_Dai, Cua_Cao, Cua_Rong);
@@ -313,22 +312,24 @@ void setBoCua() {
 	vec4 color = { 0, 0, 0 };
 	glUniform4fv(glGetUniformLocation(program, "colorValues"), 1, color);
 	changeColor(1, 0, 0);
-	model_codrinate = Translate(2.24, 1, 8);
+	model_codrinate = Translate(2.228, 1, 8);
 	model_scale = 17;
 
-	GLdouble Cua_Dai = 0.1 * model_scale, Cua_Rong = 0.01 * model_scale, Cua_Cao = 0.3 * model_scale,
+	GLdouble Cua_Dai = 0.1015 * model_scale, Cua_Rong = 0.01 * model_scale, Cua_Cao = 0.3 * model_scale,
 		Num_Dai = 0.01 * model_scale, Num_Rong = 0.02 * model_scale, Num_Cao = 0.01 * model_scale;
 	mat4 instance;
 	mat4 model_view;
 
 	BoCua(instance, model_view, Num_Dai, Num_Rong, Num_Cao, Cua_Dai, Cua_Rong, Cua_Cao);
 }
-// tao xe oto cho - aka Minh Duc
+
+// tao xe oto cho hang - aka Minh Duc
 GLfloat theta1 = 0, theta2 = 0, theta3 = 0, ctphai = 0, cttrai = 0, strai = 0, sphai = 0, banhxelan = 0;
 GLfloat run_x = 0, locX = 0, locY = 0, locZ = 0;
 GLfloat  locXP = 0, locYP = 0, locZP = 0;
 GLfloat  locXTP = 0, locYTP = 0, locZTP = 0;
 GLfloat  locXTT = 0, locYTT = 0, locZTT = 0;
+// 2 mặt 2 bên thùng xe
 void thanhchandoc1(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	changeColor(0, 0.5, 0.5);
@@ -337,30 +338,35 @@ void thanhchandoc1(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 	
 }
+// mặt trên thùng xe
 void matthungxe(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	instance = model_codrinate * Translate(run_x * model_scale * car_scale, 0, 0) * Translate(x, y, z) * Scale(1 * model_scale * car_scale, 0.05 * model_scale * car_scale, 0.55 * model_scale * car_scale);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// mặt chắn trước của thùng xe
 void matdoc(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	instance = model_codrinate * Translate(run_x * model_scale * car_scale, 0, 0) * Translate(x, y, z) * Scale(0.05 * model_scale * car_scale, 0.5 * model_scale * car_scale, 0.55 * model_scale * car_scale);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// gầm xe
 void gamxe(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	instance = model_codrinate * Translate(run_x * model_scale * car_scale, 0, 0) * Translate(x, y, z) * Scale(1.5 * model_scale * car_scale, 0.1 * model_scale * car_scale, 0.55 * model_scale * car_scale);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// đầu xe
 void dauxe(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	instance = model_codrinate * Translate(run_x * model_scale * car_scale, 0, 0) * Translate(x, y, z) * Scale(0.475 * model_scale*car_scale, 0.4 * model_scale * car_scale, 0.55 * model_scale * car_scale);
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// cửa sau xe bên trái
 void cuasauxet(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	vec4 color = { 0, 1, 0 };
@@ -370,6 +376,7 @@ void cuasauxet(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// cửa sau xe bên phải
 void cuasauxep(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	vec4 color = { 0.5, 0.5, 0 };
@@ -379,6 +386,7 @@ void cuasauxep(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// cửa xe trước bên phải
 void cuaxephai(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	vec4 color = { 1, 1, 1 };
@@ -388,6 +396,7 @@ void cuaxephai(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// cửa xe trước bên trái
 void cuaxetrai(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	vec4 color = { 1, 1, 1 };
@@ -397,6 +406,7 @@ void cuaxetrai(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 	glUniformMatrix4fv(model_view_loc, 1, GL_TRUE, instance * model_view);
 	glDrawArrays(GL_TRIANGLES, 0, NumPoints);
 }
+// cửa kính của xe
 void cuakinh(mat4 instance, mat4 model_view, GLfloat x, GLfloat y, GLfloat z)
 {
 	vec4 color = { 1, 1, 1 };
@@ -603,7 +613,7 @@ void keyboard( unsigned char key, int x, int y )
 	case '5':	// di chuyen xe ve sau
 		banhxelan -= 10;// xoay banh xe cung chieu kim dong ho
 		run_x += 0.01;
-		glutPostRedisplay();		// quit program
+		glutPostRedisplay();
 		break;
 	case 'v':	// mở cua sau trai	
 		strai += 30;
@@ -618,7 +628,7 @@ void keyboard( unsigned char key, int x, int y )
 			//locYP += (0.4 / 3);
 			locZ -= (0.15 / 3);
 		}
-		glutPostRedisplay();		// quit program
+		glutPostRedisplay();		
 		break;
 	case 'V':	// dong cua sau trai	
 		strai -= 30;
